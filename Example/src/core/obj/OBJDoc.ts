@@ -241,7 +241,7 @@ class OBJDoc {
             vertexs[face.vIndices[2]].elements[1],
             vertexs[face.vIndices[2]].elements[2],
         ];
-        let normal = this.calcNormal(v0, v1, v2);
+        let normal = Utils.calcNormal(v0, v1, v2);
         if (normal === null) {
             if (face.vIndices.length >= 4) {
                 const v3 = [
@@ -249,7 +249,7 @@ class OBJDoc {
                     vertexs[face.vIndices[3]].elements[1],
                     vertexs[face.vIndices[3]].elements[2],
                 ];
-                normal = this.calcNormal(v1, v2, v3);
+                normal = Utils.calcNormal(v1, v2, v3);
                 if (normal === null) {
                     normal = new Float32Array(3);
                     normal[0] = 0.0; normal[1] = 1.0; normal[2] = 0.0;
@@ -277,24 +277,6 @@ class OBJDoc {
         face.numIndices = face.vIndices.length;
 
         return face;
-    }
-
-    private calcNormal(p0: Array<number>, p1: Array<number>, p2: Array<number>): Float32Array {
-        const v0 = new Float32Array(3);
-        const v1 = new Float32Array(3);
-        for (let i = 0; i < 3; i++){
-            v0[i] = p0[i] - p1[i];
-            v1[i] = p2[i] - p1[i];
-        }
-        // 差乘求法向量
-        const c = new Float32Array(3);
-        c[0] = v0[1] * v1[2] - v0[2] * v1[1];
-        c[1] = v0[2] * v1[0] - v0[0] * v1[2];
-        c[2] = v0[0] * v1[1] - v0[1] * v1[0];
-
-        const v = new Vector3([c[0], c[1], c[2]]);
-        v.normalize();
-        return v.elements;
     }
 
 }
