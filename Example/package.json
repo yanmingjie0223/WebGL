@@ -1,0 +1,11 @@
+{
+	"name": "webgl_book",
+	"version": "1.0.0",
+	"description": "Learning webgl",
+	"main": "",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "yanmingjie0223",
+	"license": "ISC"
+}
